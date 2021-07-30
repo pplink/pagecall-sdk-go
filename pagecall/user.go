@@ -7,14 +7,14 @@ import (
 )
 
 type user struct {
-	ApplicationID  string `json:"application_id"`
+	ID             string `json:"id"`
 	UserID         string `json:"user_id"`
+	Name           string `json:"name"`
+	ApplicationID  string `json:"application_id"`
+	OrganizationID string `json:"organization_id"`
 	AccessToken    string `json:"access_token"`
 	CreatedAt      string `json:"created_at"`
-	Name           string `json:"name"`
-	OrganizationID string `json:"organization_id"`
 	UpdatedAt      string `json:"updated_at"`
-	ID             string `json:"id"`
 }
 
 func (p pageCallClient) CreateUser(id string, name string) (*user, error) {

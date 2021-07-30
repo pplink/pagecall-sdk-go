@@ -7,23 +7,23 @@ import (
 )
 
 type room struct {
-	DistinctUserIDs          []string `json:"distinct_user_ids"`
-	InitialPages             []string `json:"initial_pages"`
+	ID                       string   `json:"id"`
+	Name                     string   `json:"name"`
+	RoomType                 string   `json:"type"`
+	LayoutID                 string   `json:"layout_id"`
 	ApplicationID            string   `json:"application_id"`
 	OrganizationID           string   `json:"organization_id"`
 	IsDistinct               bool     `json:"is_distinct"`
-	LayoutID                 string   `json:"layout_id"`
-	RoomType                 string   `json:"type"`
-	Name                     string   `json:"name"`
 	ThumbnailURL             string   `json:"thumbnail_url"`
 	LiveTime                 int      `json:"live_time"`
-	CreatedAt                string   `json:"created_at"`
-	UpdatedAt                string   `json:"updated_at"`
-	TerminatedAt             string   `json:"terminated_at,omitempty"`
 	LiveTimeSectionStartedAt string   `json:"live_time_section_started_at,omitempty"`
 	IsRecurring              bool     `json:"is_recurring"`
 	IsTerminated             bool     `json:"is_terminated"`
-	ID                       string   `json:"id"`
+	TerminatedAt             string   `json:"terminated_at,omitempty"`
+	CreatedAt                string   `json:"created_at"`
+	UpdatedAt                string   `json:"updated_at"`
+	DistinctUserIDs          []string `json:"distinct_user_ids"`
+	InitialPages             []string `json:"initial_pages"`
 	Members                  []member `json:"members"`
 }
 

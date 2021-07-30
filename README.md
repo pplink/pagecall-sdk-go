@@ -56,4 +56,4 @@ func main() {
 - [pageCall Developer Console](https://console.pagecall.net/)
 
 ## License
-[MIT](./LICENSE)
+[Apache-2.0](./LICENSE)

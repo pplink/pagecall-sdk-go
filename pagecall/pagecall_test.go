@@ -13,30 +13,36 @@ const key string = "pagecall_api_key"
 const layoutID string = "pagecall_layout_id"
 
 func TestPageCallSDK(t *testing.T) {
+	userID := fmt.Sprintf("%d", time.Now().Unix())
+	userName := fmt.Sprintf("%d", time.Now().Unix())
+	roomName := fmt.Sprintf("%d", time.Now().Unix())
+
 	client := pagecall.NewPageCallClient(key)
 
-	temp := fmt.Sprintf("%d", time.Now().Unix())
-
-	newUser, err := client.CreateUser(temp, temp)
+	newUser, err := client.CreateUser(userID, userName)
 
 	assert.NoError(t, err)
+	assert.Equal(t, newUser.UserID, userID)
 
 	user, err := client.GetUser(newUser.UserID)
 
 	assert.NoError(t, err)
+	assert.Equal(t, user.ID, newUser.ID)
 
 	users, err := client.GetUsers()
 
 	assert.NoError(t, err)
 	assert.NotEqual(t, len(users), 0)
 
-	newRoom, err := client.CreateRoom(pagecall.PrivateRoomType, "SDK Test Room", layoutID, false, []string{})
+	newRoom, err := client.CreateRoom(pagecall.PrivateRoomType, roomName, layoutID, false, []string{})
 
 	assert.NoError(t, err)
+	assert.Equal(t, newRoom.Name, roomName)
 
 	room, err := client.GetRoom(newRoom.ID)
 
 	assert.NoError(t, err)
+	assert.Equal(t, room.ID, newRoom.ID)
 
 	rooms, err := client.GetRooms()
 
@@ -46,6 +52,8 @@ func TestPageCallSDK(t *testing.T) {
 	member, err := client.JoinRoom(room.ID, user.UserID, nil, nil)
 
 	assert.NoError(t, err)
+	assert.Equal(t, member.UserID, user.UserID)
+	assert.Equal(t, member.RoomID, room.ID)
 
 	members, err := client.GetMembers(room.ID, 0, 10)
 
@@ -60,7 +68,8 @@ func TestPageCallSDK(t *testing.T) {
 
 	assert.NoError(t, err)
 
-	_, err = client.TerminateRoom(room.ID)
+	terminatedRoom, err := client.TerminateRoom(room.ID)
 
 	assert.NoError(t, err)
+	assert.Equal(t, terminatedRoom.IsTerminated, true)
 }

@@ -53,7 +53,7 @@ func main() {
 ## Reference
 
 - [PageCall](https://pagecall.net/)
-- [pageCall Developer Console](https://console.pagecall.net/)
+- [PageCall Developer Console](https://console.pagecall.net/)
 
 ## License
 [Apache-2.0](./LICENSE)

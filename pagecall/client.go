@@ -20,7 +20,7 @@ type PageCallClient interface {
 	request(method string, path string, payload io.Reader) ([]byte, error)
 
 	/*
-		Create a user.
+		Create an user.
 	*/
 	CreateUser(id string, name string) (*user, error)
 
@@ -30,7 +30,7 @@ type PageCallClient interface {
 	CreateRoom(roomType string, name string, layoutID string, isDistinct bool, userIDs []string) (*room, error)
 
 	/*
-		Get a user's information.
+		Get user's information.
 	*/
 	GetUser(userID string) (*user, error)
 
@@ -40,7 +40,7 @@ type PageCallClient interface {
 	GetUsers() ([]user, error)
 
 	/*
-		Get a room's information.
+		Get room's information.
 	*/
 	GetRoom(roomID string) (*room, error)
 
@@ -60,12 +60,12 @@ type PageCallClient interface {
 	GetLiveSessions(roomID string) ([]session, error)
 
 	/*
-		Join a user to the room.
+		Add an user to the room.
 	*/
 	JoinRoom(roomID string, userID string, layoutID *string, options map[string]interface{}) (*member, error)
 
 	/*
-		Create a URL to access the room.
+		Create an URL to access the room.
 	*/
 	BuildJoinRoomURL(roomID string, accessToken string) string
 

@@ -53,7 +53,7 @@ func TestJoinRoom(t *testing.T) {
 		t.Error(err)
 	}
 
-	client.BuildJoinRoomURL(member.RoomID, member.AccessToken)
+	client.BuildURLToJoinRoom(member.RoomID, member.AccessToken)
 	_, err = client.TerminateRoom(room.ID)
 
 	if err != nil {
@@ -61,7 +61,7 @@ func TestJoinRoom(t *testing.T) {
 	}
 }
 
-func TestGetLiveSessionsOfRoom(t *testing.T) {
+func TestGetLiveSessions(t *testing.T) {
 	client := pagecall.NewPageCallClient(key)
 	_, err := client.GetLiveSessions("roomID")
 
@@ -88,7 +88,7 @@ func TestGetUsers(t *testing.T) {
 	}
 }
 
-func TestGetMembersOfRoom(t *testing.T) {
+func TestGetMembers(t *testing.T) {
 	client := pagecall.NewPageCallClient(key)
 	_, err := client.GetMembers("roomID", 0, 10)
 

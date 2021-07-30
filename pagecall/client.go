@@ -67,7 +67,7 @@ type PageCallClient interface {
 	/*
 		Create an URL to access the room.
 	*/
-	BuildJoinRoomURL(roomID string, accessToken string) string
+	BuildURLToJoinRoom(roomID string, accessToken string) string
 
 	/*
 		Terminate the room.
@@ -118,6 +118,6 @@ func (p pageCallClient) request(method string, path string, payload io.Reader) (
 	return body, nil
 }
 
-func (p pageCallClient) BuildJoinRoomURL(roomID string, accessToken string) string {
+func (p pageCallClient) BuildURLToJoinRoom(roomID string, accessToken string) string {
 	return fmt.Sprintf("%s/%s?access_token=%s", AppDomain, roomID, accessToken)
 }

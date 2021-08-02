@@ -148,8 +148,9 @@ func (p pageCallClient) GetRoom(roomID string) (*room, error) {
 	return &respBody.Room, nil
 }
 
-func (p pageCallClient) GetRooms() ([]room, error) {
-	body, err := p.request("GET", "/rooms", nil)
+func (p pageCallClient) GetRooms(offset int, limit int) ([]room, error) {
+	path := fmt.Sprintf("/rooms?offset=%d&limit=%d", offset, limit)
+	body, err := p.request("GET", path, nil)
 
 	if err != nil {
 		return nil, err

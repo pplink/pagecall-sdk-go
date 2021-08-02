@@ -35,7 +35,7 @@ type PageCallClient interface {
 	GetUser(userID string) (*user, error)
 
 	/*
-		Get a list of all users.
+		Get a list of users.
 	*/
 	GetUsers(offset int, limit int) ([]user, error)
 
@@ -45,12 +45,12 @@ type PageCallClient interface {
 	GetRoom(roomID string) (*room, error)
 
 	/*
-		Get a list of all rooms.
+		Get a list of rooms.
 	*/
-	GetRooms() ([]room, error)
+	GetRooms(offset int, limit int) ([]room, error)
 
 	/*
-		Get a list of all members in the room.
+		Get a list of members in the room.
 	*/
 	GetMembers(roomID string, offset int, limit int) ([]member, error)
 

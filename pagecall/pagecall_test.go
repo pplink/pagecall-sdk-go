@@ -1,116 +1,75 @@
 package pagecall_test
 
 import (
+	"fmt"
 	"testing"
+	"time"
 
 	"github.com/pplink/pagecall-sdk-go/pagecall"
+	"github.com/stretchr/testify/assert"
 )
 
 const key string = "pagecall_api_key"
 const layoutID string = "pagecall_layout_id"
 
-func TestCreateRoom(t *testing.T) {
+func TestPageCallSDK(t *testing.T) {
+	userID := fmt.Sprintf("%d", time.Now().Unix())
+	userName := fmt.Sprintf("%d", time.Now().Unix())
+	roomName := fmt.Sprintf("%d", time.Now().Unix())
+
 	client := pagecall.NewPageCallClient(key)
-	room, err := client.CreateRoom(pagecall.PrivateRoomType, "SDK test", layoutID, false, []string{})
 
-	if err != nil {
-		t.Error(err)
-	}
+	newUser, err := client.CreateUser(userID, userName)
 
-	_, err = client.TerminateRoom(room.ID)
+	assert.NoError(t, err)
+	assert.Equal(t, newUser.UserID, userID)
 
-	if err != nil {
-		t.Error(err)
-	}
-}
+	user, err := client.GetUser(newUser.UserID)
 
-func TestCreateUser(t *testing.T) {
-	client := pagecall.NewPageCallClient(key)
-	_, err := client.CreateUser("sdk", "pplinkian")
+	assert.NoError(t, err)
+	assert.Equal(t, user.ID, newUser.ID)
 
-	if err != nil {
-		t.Error(err)
-	}
-}
+	users, err := client.GetUsers(0, 10)
 
-func TestJoinRoom(t *testing.T) {
-	client := pagecall.NewPageCallClient(key)
-	room, err := client.CreateRoom(pagecall.PrivateRoomType, "SDK Test", layoutID, false, []string{})
+	assert.NoError(t, err)
+	assert.NotEqual(t, len(users), 0)
 
-	if err != nil {
-		t.Error(err)
-	}
+	newRoom, err := client.CreateRoom(pagecall.PrivateRoomType, roomName, layoutID)
 
-	user, err := client.CreateUser("sdk", "pplinkian")
+	assert.NoError(t, err)
+	assert.Equal(t, newRoom.Name, roomName)
 
-	if err != nil {
-		t.Error(err)
-	}
+	room, err := client.GetRoom(newRoom.ID)
+
+	assert.NoError(t, err)
+	assert.Equal(t, room.ID, newRoom.ID)
+
+	rooms, err := client.GetRooms(0, 10)
+
+	assert.NoError(t, err)
+	assert.NotEqual(t, len(rooms), 0)
 
 	member, err := client.JoinRoom(room.ID, user.UserID, nil, nil)
 
-	if err != nil {
-		t.Error(err)
-	}
+	assert.NoError(t, err)
+	assert.Equal(t, member.UserID, user.UserID)
+	assert.Equal(t, member.RoomID, room.ID)
 
-	client.BuildJoinRoomURL(member.RoomID, member.AccessToken)
-	_, err = client.TerminateRoom(room.ID)
+	members, err := client.GetMembers(room.ID, 0, 10)
 
-	if err != nil {
-		t.Error(err)
-	}
-}
+	assert.NoError(t, err)
+	assert.NotEqual(t, len(members), 0)
 
-func TestGetLiveSessionsOfRoom(t *testing.T) {
-	client := pagecall.NewPageCallClient(key)
-	_, err := client.GetLiveSessions("roomID")
+	url := client.BuildURLToJoinRoom(member.RoomID, member.AccessToken)
 
-	if err != nil {
-		t.Error(err)
-	}
-}
+	assert.Equal(t, fmt.Sprintf("%s/%s?access_token=%s", pagecall.AppDomain, member.RoomID, member.AccessToken), url)
 
-func TestGetUser(t *testing.T) {
-	client := pagecall.NewPageCallClient(key)
-	_, err := client.GetUser("sdk")
+	_, err = client.GetLiveSessions(room.ID, 0, 10)
 
-	if err != nil {
-		t.Error(err)
-	}
-}
+	assert.NoError(t, err)
 
-func TestGetUsers(t *testing.T) {
-	client := pagecall.NewPageCallClient(key)
-	_, err := client.GetUsers()
+	terminatedRoom, err := client.TerminateRoom(room.ID)
 
-	if err != nil {
-		t.Error(err)
-	}
-}
-
-func TestGetMembersOfRoom(t *testing.T) {
-	client := pagecall.NewPageCallClient(key)
-	_, err := client.GetMembers("roomID", 0, 10)
-
-	if err != nil {
-		t.Error(err)
-	}
-}
-
-func TestGetRoom(t *testing.T) {
-	client := pagecall.NewPageCallClient(key)
-	_, err := client.GetRoom("roomID")
-
-	if err != nil {
-		t.Error(err)
-	}
-}
-
-func TestGetRooms(t *testing.T) {
-	client := pagecall.NewPageCallClient(key)
-	_, err := client.GetRooms()
-
-	if err != nil {
-		t.Error(err)
-	}
+	assert.NoError(t, err)
+	assert.Equal(t, terminatedRoom.IsTerminated, true)
 }

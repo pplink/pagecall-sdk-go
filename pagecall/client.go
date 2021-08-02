@@ -20,54 +20,56 @@ type PageCallClient interface {
 	request(method string, path string, payload io.Reader) ([]byte, error)
 
 	/*
-		Create a user.
+		Create an user.
 	*/
 	CreateUser(id string, name string) (*user, error)
 
 	/*
 		Create a room.
 	*/
-	CreateRoom(roomType string, name string, layoutID string, isDistinct bool, userIDs []string) (*room, error)
+	CreateRoom(roomType string, name string, layoutID string) (*room, error)
 
 	/*
-		Get a user's information.
+		Get user's information.
 	*/
 	GetUser(userID string) (*user, error)
 
 	/*
-		Get a list of all users.
+		Get a list of users.
 	*/
-	GetUsers() ([]user, error)
+	GetUsers(offset int, limit int) ([]user, error)
 
 	/*
-		Get a room's information.
+		Get room's information.
 	*/
 	GetRoom(roomID string) (*room, error)
 
 	/*
-		Get a list of all rooms.
+		Get a list of rooms.
 	*/
-	GetRooms() ([]room, error)
+	GetRooms(offset int, limit int) ([]room, error)
 
 	/*
-		Get a list of all members in the room.
+		Get a list of members in the room.
 	*/
 	GetMembers(roomID string, offset int, limit int) ([]member, error)
 
 	/*
 		Get a list of member sessions currently in the room.
 	*/
-	GetLiveSessions(roomID string) ([]session, error)
+	GetLiveSessions(roomID string, offset int, limit int) ([]session, error)
 
 	/*
-		Join a user to the room.
+		Add an user to the room.
+
+		If layoutID is set, override room layout.
 	*/
 	JoinRoom(roomID string, userID string, layoutID *string, options map[string]interface{}) (*member, error)
 
 	/*
-		Create a URL to access the room.
+		Create an URL to access the room.
 	*/
-	BuildJoinRoomURL(roomID string, accessToken string) string
+	BuildURLToJoinRoom(roomID string, accessToken string) string
 
 	/*
 		Terminate the room.
@@ -118,6 +120,6 @@ func (p pageCallClient) request(method string, path string, payload io.Reader) (
 	return body, nil
 }
 
-func (p pageCallClient) BuildJoinRoomURL(roomID string, accessToken string) string {
+func (p pageCallClient) BuildURLToJoinRoom(roomID string, accessToken string) string {
 	return fmt.Sprintf("%s/%s?access_token=%s", AppDomain, roomID, accessToken)
 }

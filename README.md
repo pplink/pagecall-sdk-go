@@ -25,13 +25,13 @@ func main() {
 
 	client := pagecall.NewPageCallClient(apiKey)
 
-	user, err := client.CreateUser("userID", "pplink")
+	user, err := client.CreateUser("userID", "userName")
 
 	if err != nil {
 		panic(err)
 	}
 
-	room, err := client.CreateRoom(pagecall.PrivateRoomType, "PageCall SDK Test", layoutID, false, []string{})
+	room, err := client.CreateRoom(pagecall.PrivateRoomType, "PageCall SDK Test Room", layoutID)
 
 	if err != nil {
 		panic(err)
@@ -43,7 +43,7 @@ func main() {
 		panic(err)
 	}
 
-	url := client.BuildJoinRoomURL(member.RoomID, member.AccessToken)
+	url := client.BuildURLToJoinRoom(member.RoomID, member.AccessToken)
 
 	fmt.Println(url)
 }
@@ -53,7 +53,8 @@ func main() {
 ## Reference
 
 - [PageCall](https://pagecall.net/)
-- [pageCall Developer Console](https://console.pagecall.net/)
+- [PageCall Developer Console](https://console.pagecall.net/)
+- [PageCall API Document](https://docs.pagecall.net/)
 
 ## License
 [Apache-2.0](./LICENSE)

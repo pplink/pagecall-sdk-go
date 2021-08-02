@@ -24,8 +24,8 @@ type session struct {
 	AppVersion           string `json:"app_version"`
 }
 
-func (p pageCallClient) GetLiveSessions(roomID string) ([]session, error) {
-	path := fmt.Sprintf("/rooms/%s/sessions", roomID)
+func (p pageCallClient) GetLiveSessions(roomID string, offset int, limit int) ([]session, error) {
+	path := fmt.Sprintf("/rooms/%s/sessions?is_connecting=true&offset=%d&limit=%d", roomID, offset, limit)
 	body, err := p.request("GET", path, nil)
 
 	if err != nil {

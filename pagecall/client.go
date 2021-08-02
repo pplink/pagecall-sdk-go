@@ -57,7 +57,7 @@ type PageCallClient interface {
 	/*
 		Get a list of member sessions currently in the room.
 	*/
-	GetLiveSessions(roomID string) ([]session, error)
+	GetLiveSessions(roomID string, offset int, limit int) ([]session, error)
 
 	/*
 		Add an user to the room.

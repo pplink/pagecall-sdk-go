@@ -29,7 +29,7 @@ func TestPageCallSDK(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, user.ID, newUser.ID)
 
-	users, err := client.GetUsers()
+	users, err := client.GetUsers(0, 10)
 
 	assert.NoError(t, err)
 	assert.NotEqual(t, len(users), 0)
@@ -44,7 +44,7 @@ func TestPageCallSDK(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, room.ID, newRoom.ID)
 
-	rooms, err := client.GetRooms()
+	rooms, err := client.GetRooms(0, 10)
 
 	assert.NoError(t, err)
 	assert.NotEqual(t, len(rooms), 0)
@@ -64,7 +64,7 @@ func TestPageCallSDK(t *testing.T) {
 
 	assert.Equal(t, fmt.Sprintf("%s/%s?access_token=%s", pagecall.AppDomain, member.RoomID, member.AccessToken), url)
 
-	_, err = client.GetLiveSessions(room.ID)
+	_, err = client.GetLiveSessions(room.ID, 0, 10)
 
 	assert.NoError(t, err)
 

@@ -25,13 +25,13 @@ func main() {
 
 	client := pagecall.NewPageCallClient(apiKey)
 
-	user, err := client.CreateUser("userID", "pplink")
+	user, err := client.CreateUser("userID", "userName")
 
 	if err != nil {
 		panic(err)
 	}
 
-	room, err := client.CreateRoom(pagecall.PrivateRoomType, "PageCall SDK Test", layoutID)
+	room, err := client.CreateRoom(pagecall.PrivateRoomType, "PageCall SDK Test Room", layoutID)
 
 	if err != nil {
 		panic(err)

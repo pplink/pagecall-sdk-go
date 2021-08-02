@@ -34,7 +34,7 @@ func TestPageCallSDK(t *testing.T) {
 	assert.NoError(t, err)
 	assert.NotEqual(t, len(users), 0)
 
-	newRoom, err := client.CreateRoom(pagecall.PrivateRoomType, roomName, layoutID, false, []string{})
+	newRoom, err := client.CreateRoom(pagecall.PrivateRoomType, roomName, layoutID)
 
 	assert.NoError(t, err)
 	assert.Equal(t, newRoom.Name, roomName)

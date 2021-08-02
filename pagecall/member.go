@@ -14,8 +14,8 @@ type inlineSession struct {
 	ApplicationID        string `json:"application_id"`
 	ConnectionID         string `json:"connection_id"`
 	ConnectedAt          string `json:"connected_at"`
-	StartUsingCanvasAt   string `json:"start_using_canvas_at,omitempty"`
-	DisconnectedAt       string `json:"disconnected_at,omitempty"`
+	StartUsingCanvasAt   string `json:"start_using_canvas_at"`
+	DisconnectedAt       string `json:"disconnected_at"`
 	LastPingedAt         string `json:"last_pinged_at"`
 	ElaspsedTime         int    `json:"elapsed_time"`
 	SubscribedCanvasTime int    `json:"subscribed_canvas_time"`
@@ -38,7 +38,7 @@ type member struct {
 	Options        map[string]interface{} `json:"options"`
 	CreatedAt      string                 `json:"created_at"`
 	UpdatedAt      string                 `json:"updated_at"`
-	Sessions       []inlineSession        `json:"sessions,omitempty"`
+	Sessions       []inlineSession        `json:"sessions"`
 }
 
 func (p pageCallClient) GetMembers(roomID string, offset int, limit int) ([]member, error) {

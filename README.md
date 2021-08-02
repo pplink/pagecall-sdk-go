@@ -54,7 +54,7 @@ func main() {
 
 - [PageCall](https://pagecall.net/)
 - [PageCall Developer Console](https://console.pagecall.net/)
-- [PageCall API Guide](https://pplink.notion.site/PageCall-API-Developers-abda2d0dcc4841eea5405ce0be2f118c)
+- [PageCall API Document](https://docs.pagecall.net/)
 
 ## License
 [Apache-2.0](./LICENSE)

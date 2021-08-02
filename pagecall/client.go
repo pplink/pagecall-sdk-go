@@ -27,7 +27,7 @@ type PageCallClient interface {
 	/*
 		Create a room.
 	*/
-	CreateRoom(roomType string, name string, layoutID string, isDistinct bool, userIDs []string) (*room, error)
+	CreateRoom(roomType string, name string, layoutID string) (*room, error)
 
 	/*
 		Get user's information.
@@ -61,6 +61,8 @@ type PageCallClient interface {
 
 	/*
 		Add an user to the room.
+
+		If layoutID is set, override room layout.
 	*/
 	JoinRoom(roomID string, userID string, layoutID *string, options map[string]interface{}) (*member, error)
 

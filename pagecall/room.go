@@ -27,13 +27,11 @@ type room struct {
 	Members                  []member `json:"members"`
 }
 
-func (p pageCallClient) CreateRoom(roomType string, name string, layoutID string, isDistinct bool, userIDs []string) (*room, error) {
+func (p pageCallClient) CreateRoom(roomType string, name string, layoutID string) (*room, error) {
 	reqBody := make(map[string]interface{})
 	reqBody["type"] = roomType
 	reqBody["name"] = name
 	reqBody["layout_id"] = layoutID
-	reqBody["is_distinct"] = isDistinct
-	reqBody["user_ids"] = userIDs
 
 	ubytes, _ := json.Marshal(reqBody)
 	payload := bytes.NewBuffer(ubytes)

@@ -1,4 +1,4 @@
-# PageCall Server SDK for Go
+# PageCall SDK for Go
 
 pagecall-sdk-go is the official PageCall SDK for the Go programming language.
 

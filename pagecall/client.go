@@ -17,8 +17,6 @@ const ApiDomain string = "https://api.pagecall.net"
 const ApiVersion string = "v1"
 
 type PageCallClient interface {
-	request(method string, path string, payload io.Reader) ([]byte, error)
-
 	/*
 		Create an user.
 	*/

@@ -69,8 +69,9 @@ func (p pageCallClient) GetUser(userID string) (*user, error) {
 	return &respBody.User, nil
 }
 
-func (p pageCallClient) GetUsers() ([]user, error) {
-	body, err := p.request("GET", "/users", nil)
+func (p pageCallClient) GetUsers(offset int, limit int) ([]user, error) {
+	path := fmt.Sprintf("/users?offset=%d&limit=%d", offset, limit)
+	body, err := p.request("GET", path, nil)
 
 	if err != nil {
 		return nil, err

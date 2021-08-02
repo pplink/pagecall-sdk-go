@@ -37,7 +37,7 @@ type PageCallClient interface {
 	/*
 		Get a list of all users.
 	*/
-	GetUsers() ([]user, error)
+	GetUsers(offset int, limit int) ([]user, error)
 
 	/*
 		Get room's information.

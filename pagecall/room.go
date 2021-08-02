@@ -16,10 +16,10 @@ type room struct {
 	IsDistinct               bool     `json:"is_distinct"`
 	ThumbnailURL             string   `json:"thumbnail_url"`
 	LiveTime                 int      `json:"live_time"`
-	LiveTimeSectionStartedAt string   `json:"live_time_section_started_at,omitempty"`
+	LiveTimeSectionStartedAt string   `json:"live_time_section_started_at"`
 	IsRecurring              bool     `json:"is_recurring"`
 	IsTerminated             bool     `json:"is_terminated"`
-	TerminatedAt             string   `json:"terminated_at,omitempty"`
+	TerminatedAt             string   `json:"terminated_at"`
 	CreatedAt                string   `json:"created_at"`
 	UpdatedAt                string   `json:"updated_at"`
 	DistinctUserIDs          []string `json:"distinct_user_ids"`

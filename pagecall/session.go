@@ -6,22 +6,20 @@ import (
 )
 
 type session struct {
-	ID                   string `json:"id"`
-	UserID               string `json:"user_id"`
-	MemberID             string `json:"member_id"`
-	RoomID               string `json:"room_id"`
-	ApplicationID        string `json:"application_id"`
-	OrganizationID       string `json:"organization_id"`
-	ElaspsedTime         int    `json:"elapsed_time"`
-	SubscribedCanvasTime int    `json:"subscribed_canvas_time"` // Deprecated
-	SubscribedMediaSize  int    `json:"subscribed_media_size"`
-	ConnectionID         string `json:"connection_id"`
-	ConnectedAt          string `json:"connected_at"`
-	StartUsingCanvasAt   string `json:"start_using_canvas_at"`
-	LastPingedAt         string `json:"last_pinged_at"`
-	IPAdress             string `json:"ip_address"`
-	UserAgent            string `json:"user_agent"`
-	AppVersion           string `json:"app_version"`
+	ID                  string `json:"id"`
+	UserID              string `json:"user_id"`
+	MemberID            string `json:"member_id"`
+	RoomID              string `json:"room_id"`
+	ApplicationID       string `json:"application_id"`
+	OrganizationID      string `json:"organization_id"`
+	SubscribedMediaSize int    `json:"subscribed_media_size"`
+	ConnectionID        string `json:"connection_id"`
+	ConnectedAt         string `json:"connected_at"`
+	StartUsingCanvasAt  string `json:"start_using_canvas_at"`
+	LastPingedAt        string `json:"last_pinged_at"`
+	IPAdress            string `json:"ip_address"`
+	UserAgent           string `json:"user_agent"`
+	AppVersion          string `json:"app_version"`
 }
 
 func (p pageCallClient) GetLiveSessions(roomID string, offset int, limit int) ([]session, error) {

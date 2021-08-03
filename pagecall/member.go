@@ -6,24 +6,22 @@ import (
 )
 
 type inlineSession struct {
-	ID                   string `json:"_id"`
-	UserID               string `json:"user_id"`
-	MemberID             string `json:"member_id"`
-	RoomID               string `json:"room_id"`
-	OrganizationID       string `json:"organization_id"`
-	ApplicationID        string `json:"application_id"`
-	ConnectionID         string `json:"connection_id"`
-	ConnectedAt          string `json:"connected_at"`
-	StartUsingCanvasAt   string `json:"start_using_canvas_at"`
-	DisconnectedAt       string `json:"disconnected_at"`
-	LastPingedAt         string `json:"last_pinged_at"`
-	ElaspsedTime         int    `json:"elapsed_time"`
-	SubscribedCanvasTime int    `json:"subscribed_canvas_time"`
-	SubscribedMediaSize  int    `json:"subscribed_media_size"`
-	IPAdress             string `json:"ip_address"`
-	UserAgent            string `json:"user_agent"`
-	AppVersion           string `json:"app_version"`
-	V                    string `json:"_v"`
+	ID                  string `json:"_id"`
+	UserID              string `json:"user_id"`
+	MemberID            string `json:"member_id"`
+	RoomID              string `json:"room_id"`
+	OrganizationID      string `json:"organization_id"`
+	ApplicationID       string `json:"application_id"`
+	ConnectionID        string `json:"connection_id"`
+	ConnectedAt         string `json:"connected_at"`
+	StartUsingCanvasAt  string `json:"start_using_canvas_at"`
+	DisconnectedAt      string `json:"disconnected_at"`
+	LastPingedAt        string `json:"last_pinged_at"`
+	SubscribedMediaSize int    `json:"subscribed_media_size"`
+	IPAdress            string `json:"ip_address"`
+	UserAgent           string `json:"user_agent"`
+	AppVersion          string `json:"app_version"`
+	V                   string `json:"_v"`
 }
 
 type member struct {

@@ -2,15 +2,16 @@ package pagecall_test
 
 import (
 	"fmt"
+	"os"
 	"testing"
 	"time"
 
 	"github.com/pplink/pagecall-sdk-go/pagecall"
-	"github.com/stretchr/testify/assert"
+	"github.com/tj/assert"
 )
 
-const key string = "pagecall_api_key"
-const layoutID string = "pagecall_layout_id"
+var key string = os.Args[len(os.Args)-2]
+var layoutID string = os.Args[len(os.Args)-1]
 
 func TestPageCallSDK(t *testing.T) {
 	userID := fmt.Sprintf("%d", time.Now().Unix())

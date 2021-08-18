@@ -1,6 +1,8 @@
 package pagecall
 
 import (
+	"bytes"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
@@ -73,6 +75,11 @@ type PageCallClient interface {
 		Terminate the room.
 	*/
 	TerminateRoom(roomID string) (*room, error)
+
+	/*
+		Using the post action to sessions feature, the according script can be executed within the connected session client.
+	*/
+	PostActionToSessions(sessionIDs []string, script string) error
 }
 
 type pageCallClient struct {
@@ -120,4 +127,22 @@ func (p pageCallClient) request(method string, path string, payload io.Reader) (
 
 func (p pageCallClient) BuildURLToJoinRoom(roomID string, accessToken string) string {
 	return fmt.Sprintf("%s/%s?access_token=%s", AppDomain, roomID, accessToken)
+}
+
+func (p pageCallClient) PostActionToSessions(sessionIDs []string, script string) error {
+	reqBody := make(map[string]interface{})
+	reqBody["type"] = "meet"
+	reqBody["session_ids"] = sessionIDs
+	reqBody["script"] = script
+
+	ubytes, _ := json.Marshal(reqBody)
+	payload := bytes.NewBuffer(ubytes)
+
+	_, err := p.request("POST", "/post_action_to_sessions", payload)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

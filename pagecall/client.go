@@ -131,7 +131,7 @@ func (p pageCallClient) BuildURLToJoinRoom(roomID string, accessToken string) st
 
 func (p pageCallClient) PostActionToSessions(sessionIDs []string, script string) error {
 	reqBody := make(map[string]interface{})
-	reqBody["type"] = "meet"
+	reqBody["type"] = "run_script"
 	reqBody["session_ids"] = sessionIDs
 	reqBody["script"] = script
 

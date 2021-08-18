@@ -69,6 +69,10 @@ func TestPageCallSDK(t *testing.T) {
 
 	assert.NoError(t, err)
 
+	err = client.PostActionToSessions([]string{}, "console.log(\"Hello, World!\")")
+
+	assert.NoError(t, err)
+
 	terminatedRoom, err := client.TerminateRoom(room.ID)
 
 	assert.NoError(t, err)
